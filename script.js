@@ -23,19 +23,25 @@ function checkLength() {
   lengthCheck = prompt(
     "Choose the length of your password. The password must have at least 8 characters and no more than 128 characters: "
   );
-  // Check every conditions
+  // Check if the input is none, it will ask again
   if (isNaN(lengthCheck)) {
     alert("Please enter your password.");
     console.log(lengthCheck);
     checkLength();
-  } else if (lengthCheck < 8) {
+  }
+  // Check if the input is less than 8, it will ask again
+  else if (lengthCheck < 8) {
     alert("Cannot be generated. The password must have at least 8 characters");
     console.log(lengthCheck);
     checkLength();
-  } else if (lengthCheck >= 8 && lengthCheck <= 128) {
+  }
+  // If the input is acceptable, will go through next prompt
+  else if (lengthCheck >= 8 && lengthCheck <= 128) {
     console.log(lengthCheck);
     alert("Next question !!!");
-  } else {
+  }
+  // otherwise it will bring back the question again
+  else {
     console.log(lengthCheck);
     alert("Cannot be generated. The password cannot have more 128 characters");
     checkLength();
@@ -111,7 +117,7 @@ function checkSpecial() {
     specialCheck = true;
     console.log(specialCheck);
     return specialCheck;
-  } else if ((specialCheck == "No")) {
+  } else if (specialCheck == "No") {
     specialCheck = false;
     console.log(lowerCheck);
     return null;
@@ -123,104 +129,36 @@ function checkSpecial() {
   return specialCheck;
 }
 // Combine all the answer above
-let makingPassworld = "";
+let makingPassword = "";
 function generatePassword() {
-  let temp = " ";
+  let temp = "";
   checkLength();
   checkUpper();
   checkLower();
   checkNumber();
   checkSpecial();
-  
-  if (upperCheck ) {
-    if(numberCheck && specialCheck){
-      temp = temp + upperChar + numberChar + specialChar;
-      console.log(temp);
-  
-    }
-    else if(!numberCheck  && specialCheck){
-      temp = temp + upperChar + specialChar;
-      console.log(temp);
-    
-    }
-    else if(numberCheck && !specialCheck){
-      temp = temp + upperChar + numberChar;
-      console.log(temp);
-     
-    }
-    temp = temp + upperChar;
-    console.log(temp);
-   
-} 
 
-// If lowercheck case
-if(lowerCheck){
-  if(numberCheck && specialCheck){
-    temp = temp + lowerChar + numberChar + specialChar;
-    console.log(temp);
- 
-  }
-  else if(!numberCheck && specialCheck){
-    temp = temp + lowerChar + specialChar;
-    console.log(temp);
-   
-  }
-  else if(numberCheck && !specialCheck){
-    temp = temp + lowerChar + numberChar;
-    console.log(temp);
-  
-  }
-  temp = temp + lowerChar;
-  console.log(temp);
-}
-
-
-// Check the number 
-if(numberCheck){
-  if(specialCheck){
-    temp = temp + numberChar + specialChar;
-    console.log(temp);
-
-  }
-  else{
-    temp = temp + numberChar;
-    console.log(temp);
-
-  }
-}
-
-
-// Check Special
-if(specialCheck){
-    temp = temp + specialChar;
-    console.log(temp);
-  }
-  
-console.log("Check " + temp);
-
-
-for( let i =0; i < checkLength; i++){
-  temp = temp + temp.charAt(Math.floor(Math.random() * checkLength));
-  makingPassworld = temp;
-  
-}
-alert("Your password is " + makingPassworld);
-
-console.log("Check again: " + makingPassworld);
-}
-/*
-  if(upperCheck){
+  if (upperCheck) {
     temp = temp + upperChar;
   }
-  if(specialCheck){
+  if (specialCheck) {
     temp = temp + specialChar;
   }
-  if(numberCheck){
+  if (numberCheck) {
     temp = temp + numberChar;
   }
-  if(lowerCheck){
+  if (lowerCheck) {
     temp = temp + lowerChar;
   }
-  alert(temp);
-} */
+  console.log(temp);
+  makingPassword = "";
+  for (i = 0; i < lengthCheck; i++) {
+    makingPassword = makingPassword.concat(
+      temp[Math.floor(Math.random() * temp.length)]
+    );
+    console.log(makingPassword);
+  }
+  console.log(makingPassword);
 
+  return makingPassword;
+}
